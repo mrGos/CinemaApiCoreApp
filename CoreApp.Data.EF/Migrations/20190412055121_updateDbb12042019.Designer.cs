@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreApp.Data.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190407112200_newDb")]
-    partial class newDb
+    [Migration("20190412055121_updateDbb12042019")]
+    partial class updateDbb12042019
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -488,6 +488,12 @@ namespace CoreApp.Data.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Cast")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("Category")
+                        .HasMaxLength(255);
+
                     b.Property<string>("Content");
 
                     b.Property<DateTime>("DateCreated");
@@ -495,26 +501,35 @@ namespace CoreApp.Data.EF.Migrations
                     b.Property<DateTime>("DateModified");
 
                     b.Property<string>("Description")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Director")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Format")
                         .HasMaxLength(255);
 
                     b.Property<bool?>("HomeFlag");
 
                     b.Property<bool?>("HotFlag");
 
+                    b.Property<string>("IMDbPoints")
+                        .HasMaxLength(20);
+
                     b.Property<string>("Image")
                         .HasMaxLength(255);
-
-                    b.Property<int>("MovieCategoryId");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<decimal>("OriginalPrice");
+                    b.Property<string>("Nation")
+                        .HasMaxLength(255);
 
-                    b.Property<decimal>("Price");
+                    b.Property<string>("Rating")
+                        .HasMaxLength(255);
 
-                    b.Property<decimal?>("PromotionPrice");
+                    b.Property<DateTime>("ReleasedDate");
 
                     b.Property<string>("SeoAlias")
                         .HasColumnType("varchar(255)");
@@ -532,55 +547,17 @@ namespace CoreApp.Data.EF.Migrations
                     b.Property<string>("Tags")
                         .HasMaxLength(255);
 
-                    b.Property<string>("Unit")
+                    b.Property<string>("TimeSpan")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Video")
                         .HasMaxLength(255);
 
                     b.Property<int?>("ViewCount");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieCategoryId");
-
                     b.ToTable("Movies");
-                });
-
-            modelBuilder.Entity("CoreApp.Data.Entities.MovieCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime>("DateModified");
-
-                    b.Property<string>("Description");
-
-                    b.Property<bool?>("HomeFlag");
-
-                    b.Property<int?>("HomeOrder");
-
-                    b.Property<string>("Image");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("ParentId");
-
-                    b.Property<string>("SeoAlias");
-
-                    b.Property<string>("SeoDescription");
-
-                    b.Property<string>("SeoKeywords");
-
-                    b.Property<string>("SeoPageTitle");
-
-                    b.Property<int>("SortOrder");
-
-                    b.Property<int>("Status");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MovieCategories");
                 });
 
             modelBuilder.Entity("CoreApp.Data.Entities.MovieImage", b =>
@@ -1008,14 +985,6 @@ namespace CoreApp.Data.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CoreApp.Data.Entities.Movie", b =>
-                {
-                    b.HasOne("CoreApp.Data.Entities.MovieCategory", "MovieCategory")
-                        .WithMany("Movies")
-                        .HasForeignKey("MovieCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("CoreApp.Data.Entities.MovieImage", b =>
                 {
                     b.HasOne("CoreApp.Data.Entities.Movie", "Movie")
@@ -1040,7 +1009,7 @@ namespace CoreApp.Data.EF.Migrations
             modelBuilder.Entity("CoreApp.Data.Entities.MovieTheater", b =>
                 {
                     b.HasOne("CoreApp.Data.Entities.Movie", "Movie")
-                        .WithMany()
+                        .WithMany("MovieTheaters")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);
 

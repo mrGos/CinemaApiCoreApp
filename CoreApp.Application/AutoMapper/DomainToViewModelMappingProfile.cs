@@ -2,7 +2,7 @@
 using CoreApp.Application.ViewModels.Blog;
 using CoreApp.Application.ViewModels.Common;
 using CoreApp.Application.ViewModels.Movie;
-using CoreApp.Application.ViewModels.MovieCategory;
+
 using CoreApp.Application.ViewModels.System;
 using CoreApp.Data.Entities;
 
@@ -12,7 +12,7 @@ namespace CoreApp.Application.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<MovieCategory, MovieCategoryViewModel>();
+            //CreateMap<MovieCategory, MovieCategoryViewModel>();
             CreateMap<Movie, MovieViewModel>();
             CreateMap<Announcement, AnnouncementViewModel>().MaxDepth(2);
 

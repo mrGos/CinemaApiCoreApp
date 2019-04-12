@@ -2,7 +2,7 @@
 using CoreApp.Application.ViewModels.Blog;
 using CoreApp.Application.ViewModels.Common;
 using CoreApp.Application.ViewModels.Movie;
-using CoreApp.Application.ViewModels.MovieCategory;
+
 using CoreApp.Application.ViewModels.System;
 using CoreApp.Data.Entities;
 using System;
@@ -15,9 +15,9 @@ namespace CoreApp.Application.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-            CreateMap<MovieCategoryViewModel, MovieCategory>()
-               .ConstructUsing(c => new MovieCategory(c.Name, c.Description, c.ParentId, c.HomeOrder, c.Image, c.HomeFlag,
-                c.SortOrder, c.Status, c.SeoPageTitle, c.SeoAlias, c.SeoKeywords, c.SeoDescription));
+            //CreateMap<MovieCategoryViewModel, MovieCategory>()
+            //   .ConstructUsing(c => new MovieCategory(c.Name, c.Description, c.ParentId, c.HomeOrder, c.Image, c.HomeFlag,
+            //    c.SortOrder, c.Status, c.SeoPageTitle, c.SeoAlias, c.SeoKeywords, c.SeoDescription));
 
             CreateMap<AppUserViewModel, AppUser>()
             .ConstructUsing(c => new AppUser(c.Id.GetValueOrDefault(Guid.Empty), c.FullName, c.UserName,

@@ -73,8 +73,8 @@ namespace CoreApp.Data.Entities
         public DateTime DateCreated { set; get; }
         public DateTime DateModified { set; get; }
 
-        [DefaultValue(Status.Active)]
-        public Status Status { set; get; } = Status.Active;
+        [DefaultValue(Status.NowShowing)]
+        public Status Status { set; get; } = Status.NowShowing;
         public int Quantity { get; set; }
         public decimal TotalPrice { set; get; }
         public decimal Discount { get; set; }
