@@ -7,7 +7,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
-using CoreApp.Application.Implementation;
+
 using CoreApp.Application.Interfaces;
 using CoreApp.Data.EF;
 using CoreApp.Infrastructure.Interfaces;
@@ -15,6 +15,7 @@ using CoreApp.Application.AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using System;
 using CoreApp.Data.Entities;
+using CoreApp.Application.Implementations;
 
 namespace CoreApp.WebApi
 {
@@ -80,8 +81,9 @@ namespace CoreApp.WebApi
             services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
             services.AddTransient(typeof(IRepository<,>), typeof(EFRepository<,>));
 
-            services.AddTransient<IMovieCategoryService, MovieCategoryService>();
-
+            services.AddTransient<DbInitializer>();
+            //services.AddTransient<IMovieCategoryService, MovieCategoryService>();
+            services.AddTransient<IMovieService, MovieService>();
 
             services.AddMvc(/*CompatibilityVersion.Version_2_2*/).
                 AddJsonOptions(options =>

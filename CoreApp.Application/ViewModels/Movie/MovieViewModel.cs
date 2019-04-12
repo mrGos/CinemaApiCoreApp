@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using CoreApp.Application.ViewModels.MovieCategory;
 using CoreApp.Data.Enums;
 
 namespace CoreApp.Application.ViewModels.Movie
@@ -16,20 +15,28 @@ namespace CoreApp.Application.ViewModels.Movie
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public int MovieCategoryId { get; set; }
-
         [StringLength(255)]
         public string Image { get; set; }
+        [StringLength(255)]
+        public string Video { get; set; }
 
-        [Required]
-        [DefaultValue(0)]
-        public decimal Price { get; set; }
+        [StringLength(255)]
+        public string Director { get; set; }
+        [StringLength(500)]
+        public string Cast { get; set; }
+        [StringLength(255)]
+        public string Category { get; set; }
+        [StringLength(255)]
+        public string Format { get; set; }
+        [StringLength(255)]
+        public string Nation { get; set; }
+        public DateTime ReleasedDate { get; set; }
+        public string Rating { get; set; }
+        [StringLength(255)]
+        public string TimeSpan { get; set; }
 
-        public decimal? PromotionPrice { get; set; }
+        public decimal IMDbPoints { get; set; }
 
-        [Required]
-        public decimal OriginalPrice { get; set; }
 
         [StringLength(255)]
         public string Description { get; set; }
@@ -47,8 +54,6 @@ namespace CoreApp.Application.ViewModels.Movie
 
         [StringLength(255)]
         public string Unit { get; set; }
-
-        public MovieCategoryViewModel MovieCategory { set; get; }
 
         public string SeoPageTitle { set; get; }
 

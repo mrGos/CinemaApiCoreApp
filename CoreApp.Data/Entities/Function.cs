@@ -23,7 +23,7 @@ namespace CoreApp.Data.Entities
             this.ParentId = parentId;
             this.IconCss = iconCss;
             this.SortOrder = sortOrder;
-            this.Status = Status.Active;
+            this.Status = Status.NowShowing;
         }
         [Required]
         [StringLength(128)]

@@ -47,7 +47,7 @@ namespace CoreApp.Data.EF
         public DbSet<Footer> Footers { set; get; }
         public DbSet<Page> Pages { set; get; }
         public DbSet<Movie> Movies { set; get; }
-        public DbSet<MovieCategory> MovieCategories { set; get; }
+
         public DbSet<MovieImage> MovieImages { set; get; }
 
         public DbSet<Theater> Theaters { set; get; }

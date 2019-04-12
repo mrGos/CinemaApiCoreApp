@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoreApp.Data.EF.Migrations
 {
-    public partial class newDb : Migration
+    public partial class newDbb12042019 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -247,29 +247,40 @@ namespace CoreApp.Data.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MovieCategories",
+                name: "Movies",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    ParentId = table.Column<int>(nullable: true),
-                    HomeOrder = table.Column<int>(nullable: true),
-                    Image = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 255, nullable: false),
+                    Image = table.Column<string>(maxLength: 255, nullable: true),
+                    Video = table.Column<string>(maxLength: 255, nullable: true),
+                    Director = table.Column<string>(maxLength: 255, nullable: true),
+                    Cast = table.Column<string>(maxLength: 500, nullable: true),
+                    Category = table.Column<string>(maxLength: 255, nullable: true),
+                    Format = table.Column<string>(maxLength: 255, nullable: true),
+                    Nation = table.Column<string>(maxLength: 255, nullable: true),
+                    ReleasedDate = table.Column<DateTime>(nullable: false),
+                    Rating = table.Column<string>(maxLength: 255, nullable: true),
+                    TimeSpan = table.Column<string>(maxLength: 255, nullable: true),
+                    IMDbPoints = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(maxLength: 255, nullable: true),
+                    Content = table.Column<string>(nullable: true),
                     HomeFlag = table.Column<bool>(nullable: true),
+                    HotFlag = table.Column<bool>(nullable: true),
+                    ViewCount = table.Column<int>(nullable: true),
+                    Tags = table.Column<string>(maxLength: 255, nullable: true),
+                    SeoPageTitle = table.Column<string>(nullable: true),
+                    SeoAlias = table.Column<string>(type: "varchar(255)", nullable: true),
+                    SeoKeywords = table.Column<string>(maxLength: 255, nullable: true),
+                    SeoDescription = table.Column<string>(maxLength: 255, nullable: true),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
-                    Status = table.Column<int>(nullable: false),
-                    SeoPageTitle = table.Column<string>(nullable: true),
-                    SeoAlias = table.Column<string>(nullable: true),
-                    SeoKeywords = table.Column<string>(nullable: true),
-                    SeoDescription = table.Column<string>(nullable: true)
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovieCategories", x => x.Id);
+                    table.PrimaryKey("PK_Movies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -486,39 +497,22 @@ namespace CoreApp.Data.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Movies",
+                name: "MovieImages",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 255, nullable: false),
-                    MovieCategoryId = table.Column<int>(nullable: false),
-                    Image = table.Column<string>(maxLength: 255, nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
-                    PromotionPrice = table.Column<decimal>(nullable: true),
-                    OriginalPrice = table.Column<decimal>(nullable: false),
-                    Description = table.Column<string>(maxLength: 255, nullable: true),
-                    Content = table.Column<string>(nullable: true),
-                    HomeFlag = table.Column<bool>(nullable: true),
-                    HotFlag = table.Column<bool>(nullable: true),
-                    ViewCount = table.Column<int>(nullable: true),
-                    Tags = table.Column<string>(maxLength: 255, nullable: true),
-                    Unit = table.Column<string>(maxLength: 255, nullable: true),
-                    SeoPageTitle = table.Column<string>(nullable: true),
-                    SeoAlias = table.Column<string>(type: "varchar(255)", nullable: true),
-                    SeoKeywords = table.Column<string>(maxLength: 255, nullable: true),
-                    SeoDescription = table.Column<string>(maxLength: 255, nullable: true),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
+                    MovieId = table.Column<int>(nullable: false),
+                    Path = table.Column<string>(maxLength: 250, nullable: true),
+                    Caption = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movies", x => x.Id);
+                    table.PrimaryKey("PK_MovieImages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Movies_MovieCategories_MovieCategoryId",
-                        column: x => x.MovieCategoryId,
-                        principalTable: "MovieCategories",
+                        name: "FK_MovieImages_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -545,75 +539,6 @@ namespace CoreApp.Data.EF.Migrations
                         name: "FK_BlogTags_Tags_TagId",
                         column: x => x.TagId,
                         principalTable: "Tags",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Advertisetments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 250, nullable: true),
-                    Description = table.Column<string>(maxLength: 250, nullable: true),
-                    Image = table.Column<string>(maxLength: 250, nullable: true),
-                    Url = table.Column<string>(maxLength: 250, nullable: true),
-                    PositionId = table.Column<string>(maxLength: 20, nullable: true),
-                    Status = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    SortOrder = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Advertisetments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Advertisetments_AdvertisementPositions_PositionId",
-                        column: x => x.PositionId,
-                        principalTable: "AdvertisementPositions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AnnouncementUsers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AnnouncementId = table.Column<string>(maxLength: 128, nullable: false),
-                    UserId = table.Column<Guid>(nullable: false),
-                    HasRead = table.Column<bool>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AnnouncementUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AnnouncementUsers_Announcements_AnnouncementId",
-                        column: x => x.AnnouncementId,
-                        principalTable: "Announcements",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MovieImages",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MovieId = table.Column<int>(nullable: false),
-                    Path = table.Column<string>(maxLength: 250, nullable: true),
-                    Caption = table.Column<string>(maxLength: 250, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MovieImages", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MovieImages_Movies_MovieId",
-                        column: x => x.MovieId,
-                        principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -666,6 +591,54 @@ namespace CoreApp.Data.EF.Migrations
                         name: "FK_MovieTheaters_Theaters_TheaterId",
                         column: x => x.TheaterId,
                         principalTable: "Theaters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Advertisetments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 250, nullable: true),
+                    Description = table.Column<string>(maxLength: 250, nullable: true),
+                    Image = table.Column<string>(maxLength: 250, nullable: true),
+                    Url = table.Column<string>(maxLength: 250, nullable: true),
+                    PositionId = table.Column<string>(maxLength: 20, nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    SortOrder = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Advertisetments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Advertisetments_AdvertisementPositions_PositionId",
+                        column: x => x.PositionId,
+                        principalTable: "AdvertisementPositions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AnnouncementUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AnnouncementId = table.Column<string>(maxLength: 128, nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    HasRead = table.Column<bool>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnnouncementUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AnnouncementUsers_Announcements_AnnouncementId",
+                        column: x => x.AnnouncementId,
+                        principalTable: "Announcements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -782,11 +755,6 @@ namespace CoreApp.Data.EF.Migrations
                 name: "IX_MovieImages_MovieId",
                 table: "MovieImages",
                 column: "MovieId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Movies_MovieCategoryId",
-                table: "Movies",
-                column: "MovieCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MovieTags_MovieId",
@@ -924,9 +892,6 @@ namespace CoreApp.Data.EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Theaters");
-
-            migrationBuilder.DropTable(
-                name: "MovieCategories");
         }
     }
 }

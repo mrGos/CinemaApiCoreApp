@@ -4,14 +4,16 @@ using CoreApp.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CoreApp.Data.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190412052228_newDbb12042019")]
+    partial class newDbb12042019
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -499,7 +501,7 @@ namespace CoreApp.Data.EF.Migrations
                     b.Property<DateTime>("DateModified");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(255);
 
                     b.Property<string>("Director")
                         .HasMaxLength(255);
@@ -511,8 +513,7 @@ namespace CoreApp.Data.EF.Migrations
 
                     b.Property<bool?>("HotFlag");
 
-                    b.Property<string>("IMDbPoints")
-                        .HasMaxLength(20);
+                    b.Property<string>("IMDbPoints");
 
                     b.Property<string>("Image")
                         .HasMaxLength(255);

@@ -7,6 +7,8 @@ namespace CoreApp.Data.Enums
     public enum Status
     {
         InActive,
-        Active
+        NowShowing,
+        UpComming,
+
     }
 }
