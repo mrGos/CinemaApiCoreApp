@@ -24,9 +24,9 @@ namespace CoreApp.WebApi.Controllers
         }
         [HttpGet]
         [Route("getallmovies")]
-        public List<Movie> GetAllMovie()
+        public List<Movie> GetAllMovie(int statusType)
         {
-            return _movieService.GetAllMovie();
+            return _movieService.GetAllMovie(statusType);
         }
         [HttpGet]
         [Route("getmoviesbycondition")]
