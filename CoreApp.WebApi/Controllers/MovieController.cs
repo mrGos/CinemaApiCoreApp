@@ -30,9 +30,9 @@ namespace CoreApp.WebApi.Controllers
         }
         [HttpGet]
         [Route("getmoviesbycondition")]
-        public List<Movie> GetTopMovieByCondition(int top, int status)
+        public List<Movie> GetTopMovieByCondition(int top, int statusType)
         {
-            return _movieService.GetTopMovieByCondition(top, status);
+            return _movieService.GetTopMovieByCondition(top, statusType);
 
         }
     }

@@ -701,13 +701,16 @@ namespace CoreApp.Data.EF.Migrations
 
                     b.Property<DateTime>("DateModified");
 
-                    b.Property<DateTime>("DateTimeShowing");
+                    b.Property<DateTime>("DateShowing");
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<int>("MovieTheaterId");
 
                     b.Property<int>("Status");
+
+                    b.Property<string>("TimeShowing")
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("Id");
 

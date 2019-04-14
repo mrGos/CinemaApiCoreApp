@@ -12,7 +12,9 @@ namespace CoreApp.Data.Entities
     public class ShowTime : DomainEntity<int>, IDateTracking, ISoftDelete, ISwitchable
     {
         public int MovieTheaterId { get; set; }
-        public DateTime DateTimeShowing { get; set; }
+        public DateTime DateShowing { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string TimeShowing { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
         public bool IsDeleted { get; set; }

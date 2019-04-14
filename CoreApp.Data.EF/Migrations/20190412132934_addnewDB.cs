@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoreApp.Data.EF.Migrations
 {
-    public partial class newDbb12042019 : Migration
+    public partial class addnewDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -263,8 +263,8 @@ namespace CoreApp.Data.EF.Migrations
                     ReleasedDate = table.Column<DateTime>(nullable: false),
                     Rating = table.Column<string>(maxLength: 255, nullable: true),
                     TimeSpan = table.Column<string>(maxLength: 255, nullable: true),
-                    IMDbPoints = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(maxLength: 255, nullable: true),
+                    IMDbPoints = table.Column<string>(maxLength: 20, nullable: true),
+                    Description = table.Column<string>(maxLength: 1000, nullable: true),
                     Content = table.Column<string>(nullable: true),
                     HomeFlag = table.Column<bool>(nullable: true),
                     HotFlag = table.Column<bool>(nullable: true),
@@ -650,7 +650,8 @@ namespace CoreApp.Data.EF.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     MovieTheaterId = table.Column<int>(nullable: false),
-                    DateTimeShowing = table.Column<DateTime>(nullable: false),
+                    DateShowing = table.Column<DateTime>(nullable: false),
+                    TimeShowing = table.Column<string>(type: "varchar(20)", nullable: true),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),

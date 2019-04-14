@@ -13,6 +13,7 @@ namespace CoreApp.Data.Entities
         public Theater()
         {
             // Movies = new List<Movie>();
+            Status = Status.NowShowing;
         }
         public Theater(string name, string description, int? parentId, int? homeOrder,
             string image, bool? homeFlag, int sortOrder, Status status, string seoPageTitle, string seoAlias,
