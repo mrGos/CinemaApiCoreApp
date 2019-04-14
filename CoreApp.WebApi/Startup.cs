@@ -84,6 +84,7 @@ namespace CoreApp.WebApi
             services.AddTransient<DbInitializer>();
             //services.AddTransient<IMovieCategoryService, MovieCategoryService>();
             services.AddTransient<IMovieService, MovieService>();
+            services.AddTransient<ITheaterService, TheaterService>();
 
             services.AddMvc(/*CompatibilityVersion.Version_2_2*/).
                 AddJsonOptions(options =>

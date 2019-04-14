@@ -18,9 +18,9 @@ namespace CoreApp.Application.Implementations
         {
             _movieRepository = movieRepository;
         }
-        public List<Movie> GetAllMovie()
+        public List<Movie> GetAllMovie(int statusType)
         {
-            return _movieRepository.FindAll(x => x.Status == Status.NowShowing).ToList();
+            return _movieRepository.FindAll(x => (int)x.Status == (int)(statusType)).ToList();
         }
 
         public PagedResult<Movie> GetMovieByPaging(string keyword, int page, int pageSize)

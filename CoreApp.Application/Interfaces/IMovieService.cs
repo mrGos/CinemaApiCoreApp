@@ -10,7 +10,7 @@ namespace CoreApp.Application.Interfaces
 {
     public interface IMovieService
     {
-        List<Movie> GetAllMovie();
+        List<Movie> GetAllMovie(int statusType);
         PagedResult<Movie> GetMovieByPaging(string keyword, int page, int pageSize);
         List<Movie> GetTopMovieByCondition(int top, int status);
     }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreApp.Data.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190412055121_updateDbb12042019")]
-    partial class updateDbb12042019
+    [Migration("20190412132934_addnewDB")]
+    partial class addnewDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -703,13 +703,16 @@ namespace CoreApp.Data.EF.Migrations
 
                     b.Property<DateTime>("DateModified");
 
-                    b.Property<DateTime>("DateTimeShowing");
+                    b.Property<DateTime>("DateShowing");
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<int>("MovieTheaterId");
 
                     b.Property<int>("Status");
+
+                    b.Property<string>("TimeShowing")
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("Id");
 
