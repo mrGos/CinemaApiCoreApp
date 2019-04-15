@@ -72,12 +72,16 @@ namespace CoreApp.WebApi
             services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
             //services.AddImageResizer();
+
             services.AddAutoMapper(typeof(Startup).Assembly);
+            Mapper.Reset();
 
-            //services.AddSingleton(Mapper.Configuration);
+            Mapper.Initialize(cfg => { /* configure again */ });
+            services.AddSingleton(Mapper.Configuration);
             services.AddSingleton<AutoMapper.IConfigurationProvider>(AutoMapperConfig.RegisterMappings());
-
             services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
+
+
             services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
             services.AddTransient(typeof(IRepository<,>), typeof(EFRepository<,>));
 
@@ -85,6 +89,7 @@ namespace CoreApp.WebApi
             //services.AddTransient<IMovieCategoryService, MovieCategoryService>();
             services.AddTransient<IMovieService, MovieService>();
             services.AddTransient<ITheaterService, TheaterService>();
+            services.AddTransient<IShowTimeService, ShowTimeService>();
 
             services.AddMvc(/*CompatibilityVersion.Version_2_2*/).
                 AddJsonOptions(options =>

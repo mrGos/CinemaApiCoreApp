@@ -195,6 +195,38 @@ namespace CoreApp.Data.EF
                 //};
                 //_context.Theaters.AddRange(lst);
             }
+            if (_context.MovieTheaters.Count() == 0)
+            {
+                //List<MovieTheater> lst = new List<MovieTheater>();
+                //foreach (var movie in _context.Movies.ToList())
+                //{
+                //    foreach (var theater in _context.Theaters.ToList())
+                //    {
+                //        MovieTheater newItem = new MovieTheater()
+                //        {
+                //            MovieId = movie.Id,
+                //            TheaterId = theater.Id
+                //        };
+                //        lst.Add(newItem);
+                //    }
+                //}
+                //_context.MovieTheaters.AddRange(lst);
+            }
+            if (_context.ShowTimes.Count() == 0)
+            {
+                //List<ShowTime> lst = new List<ShowTime>();
+
+                //foreach (var movietheater in _context.MovieTheaters.ToList())
+                //{
+                //    lst.Add(new ShowTime() { MovieTheaterId = movietheater.Id, TimeShowing = "14:00" });
+                //    lst.Add(new ShowTime() { MovieTheaterId = movietheater.Id, TimeShowing = "15:50" });
+                //    lst.Add(new ShowTime() { MovieTheaterId = movietheater.Id, TimeShowing = "17:00" });
+                //    lst.Add(new ShowTime() { MovieTheaterId = movietheater.Id, TimeShowing = "18:10" });
+                //}
+
+                //_context.ShowTimes.AddRange(lst);
+            }
+
 
             if (!_context.SystemConfigs.Any(x => x.Id == "HomeTitle"))
             {

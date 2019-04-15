@@ -21,6 +21,7 @@ namespace CoreApp.Application.AutoMapper
             CreateMap<AppRole, AppRoleViewModel>();
             CreateMap<Bill, BillViewModel>();
             CreateMap<BillDetail, BillDetailViewModel>();
+            CreateMap<ShowTime, ShowTimeViewModel>();
 
             CreateMap<MovieImage, MovieImageViewModel>().MaxDepth(2);
 

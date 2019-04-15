@@ -19,5 +19,10 @@ namespace CoreApp.Application.Implementations
         {
             return _theaterRepository.FindAll(x => x.ParentId == null).ToList();
         }
+
+        public List<Theater> GetAllTheaterChild(int Id)
+        {
+            return _theaterRepository.FindAll(x => x.ParentId != null && x.ParentId == Id).ToList();
+        }
     }
 }
