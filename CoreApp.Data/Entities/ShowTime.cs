@@ -11,6 +11,14 @@ namespace CoreApp.Data.Entities
     [Table("ShowTimes")]
     public class ShowTime : DomainEntity<int>, IDateTracking, ISoftDelete, ISwitchable
     {
+        public ShowTime()
+        {
+            DateCreated = DateTime.Now;
+            DateModified = DateTime.Now;
+            Status = Status.NowShowing;
+            IsDeleted = true;
+            DateShowing = DateTime.Now;
+        }
         public int MovieTheaterId { get; set; }
         public DateTime DateShowing { get; set; }
         [Column(TypeName = "varchar(20)")]

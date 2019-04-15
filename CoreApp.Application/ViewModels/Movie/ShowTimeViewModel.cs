@@ -9,12 +9,13 @@ namespace CoreApp.Application.ViewModels.Movie
     {
         public int Id { get; set; }
         public int MovieTheaterId { get; set; }
-        public DateTime DateTimeShowing { get; set; }
+        public DateTime DateShowing { get; set; }
+        public string TimeShowing { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
         public bool IsDeleted { get; set; }
         public Status Status { get; set; }
 
-        public virtual MovieTheaterViewModel MovieTheaterViewModel { get; set; }
+        // public virtual MovieTheaterViewModel MovieTheaterViewModel { get; set; }
     }
 }

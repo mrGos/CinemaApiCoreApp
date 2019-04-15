@@ -8,5 +8,6 @@ namespace CoreApp.Application.Interfaces
     public interface ITheaterService
     {
         List<Theater> GetAllTheater();
+        List<Theater> GetAllTheaterChild(int Id);
     }
 }

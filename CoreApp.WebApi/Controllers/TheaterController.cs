@@ -22,5 +22,11 @@ namespace CoreApp.WebApi.Controllers
         {
             return _theaterService.GetAllTheater();
         }
+        [HttpGet]
+        [Route("getalltheaterschild")]
+        public List<Theater> GetAllTheaterChild(int id)
+        {
+            return _theaterService.GetAllTheaterChild(id);
+        }
     }
 }
