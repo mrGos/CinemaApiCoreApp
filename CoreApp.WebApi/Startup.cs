@@ -75,8 +75,8 @@ namespace CoreApp.WebApi
 
             services.AddAutoMapper(typeof(Startup).Assembly);
             Mapper.Reset();
-
             Mapper.Initialize(cfg => { /* configure again */ });
+
             services.AddSingleton(Mapper.Configuration);
             services.AddSingleton<AutoMapper.IConfigurationProvider>(AutoMapperConfig.RegisterMappings());
             services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
@@ -111,7 +111,6 @@ namespace CoreApp.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
 
             if (env.IsDevelopment())
             {

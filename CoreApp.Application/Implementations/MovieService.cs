@@ -1,4 +1,6 @@
-﻿using CoreApp.Application.Interfaces;
+﻿using AutoMapper;
+using CoreApp.Application.Interfaces;
+using CoreApp.Application.ViewModels.Movie;
 using CoreApp.Data.Entities;
 using CoreApp.Data.Enums;
 using CoreApp.Infrastructure.Interfaces;
@@ -14,13 +16,20 @@ namespace CoreApp.Application.Implementations
     public class MovieService : IMovieService
     {
         IRepository<Movie, int> _movieRepository;
-        public MovieService(IRepository<Movie, int> movieRepository)
+        IMapper _mapper;
+        public MovieService(IRepository<Movie, int> movieRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
+            _mapper = mapper;
         }
         public List<Movie> GetAllMovie(int statusType)
         {
             return _movieRepository.FindAll(x => (int)x.Status == (int)(statusType)).ToList();
+        }
+
+        public MovieViewModel GetMovieById(int id)
+        {
+            return _mapper.Map<Movie, MovieViewModel>(_movieRepository.FindById(id));
         }
 
         public PagedResult<Movie> GetMovieByPaging(string keyword, int page, int pageSize)
