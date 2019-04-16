@@ -1,4 +1,5 @@
-﻿using CoreApp.Data.Entities;
+﻿using CoreApp.Application.ViewModels.Movie;
+using CoreApp.Data.Entities;
 using CoreApp.Data.Enums;
 using CoreApp.Utilities.Dtos;
 using System;
@@ -13,5 +14,6 @@ namespace CoreApp.Application.Interfaces
         List<Movie> GetAllMovie(int statusType);
         PagedResult<Movie> GetMovieByPaging(string keyword, int page, int pageSize);
         List<Movie> GetTopMovieByCondition(int top, int status);
+        MovieViewModel GetMovieById(int id);
     }
 }

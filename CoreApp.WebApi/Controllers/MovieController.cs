@@ -1,4 +1,5 @@
 ﻿using CoreApp.Application.Interfaces;
+using CoreApp.Application.ViewModels.Movie;
 using CoreApp.Data.Entities;
 using CoreApp.Utilities.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,12 @@ namespace CoreApp.WebApi.Controllers
         public List<Movie> GetTopMovieByCondition(int top, int statusType)
         {
             return _movieService.GetTopMovieByCondition(top, statusType);
-
+        }
+        [HttpGet]
+        [Route("getmoviebyid")]
+        public MovieViewModel GetMovieById(int id)
+        {
+            return _movieService.GetMovieById(id);
         }
     }
 }
