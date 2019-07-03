@@ -10,18 +10,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CoreApp.Application.Implementations
 {
     public class MovieService : IMovieService
     {
         IRepository<Movie, int> _movieRepository;
+        IUnitOfWork _unitOfWork;
         IMapper _mapper;
-        public MovieService(IRepository<Movie, int> movieRepository, IMapper mapper)
+        public MovieService(IRepository<Movie, int> movieRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _movieRepository = movieRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
+        public MovieViewModel CreateOrEdit(MovieViewModel input)
+        {
+            var obj = _mapper.Map<Movie>(input);
+
+            if (input.Id == 0)
+            {
+                _movieRepository.Add(obj);
+            }
+            else
+            {
+                _movieRepository.Update(obj);
+            }
+            _unitOfWork.Commit();
+            return input;
+        }
+
         public List<Movie> GetAllMovie(int statusType)
         {
             return _movieRepository.FindAll(x => (int)x.Status == (int)(statusType)).ToList();
@@ -32,9 +52,9 @@ namespace CoreApp.Application.Implementations
             return _mapper.Map<Movie, MovieViewModel>(_movieRepository.FindById(id));
         }
 
-        public PagedResult<Movie> GetMovieByPaging(string keyword, int page, int pageSize)
+        public PagedResult<Movie> GetMoviesByPaging(string keyword = "", int page = 1, int pageSize = 3, Status status = Status.InActive)
         {
-            var query = _movieRepository.FindAll();
+            var query = _movieRepository.FindAll(x => x.Status == status);
             if (!string.IsNullOrEmpty(keyword))
                 query = query.Where(x => x.Name.Contains(keyword));
 
@@ -58,5 +78,8 @@ namespace CoreApp.Application.Implementations
             return _movieRepository.FindAll(x => (int)x.Status == (int)status)
                 .OrderByDescending(x => x.DateCreated).Take(top).ToList();
         }
+
+
+
     }
 }

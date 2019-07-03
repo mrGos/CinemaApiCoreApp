@@ -19,6 +19,9 @@ namespace CoreApp.Application.AutoMapper
             //   .ConstructUsing(c => new MovieCategory(c.Name, c.Description, c.ParentId, c.HomeOrder, c.Image, c.HomeFlag,
             //    c.SortOrder, c.Status, c.SeoPageTitle, c.SeoAlias, c.SeoKeywords, c.SeoDescription));
 
+            //CreateMap<MovieViewModel, Movie>()
+            //    .ConstructUsing(c => new Movie());
+
             CreateMap<AppUserViewModel, AppUser>()
             .ConstructUsing(c => new AppUser(c.Id.GetValueOrDefault(Guid.Empty), c.FullName, c.UserName,
             c.Email, c.PhoneNumber, c.Avatar, c.Status));

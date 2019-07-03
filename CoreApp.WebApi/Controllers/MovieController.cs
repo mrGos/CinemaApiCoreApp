@@ -1,6 +1,7 @@
 ﻿using CoreApp.Application.Interfaces;
 using CoreApp.Application.ViewModels.Movie;
 using CoreApp.Data.Entities;
+using CoreApp.Data.Enums;
 using CoreApp.Utilities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,9 +20,9 @@ namespace CoreApp.WebApi.Controllers
         }
         [HttpGet]
         [Route("getallmoviespaging")]
-        public PagedResult<Movie> GetMovieByPaging(string keyword, int page, int size = 4)
+        public PagedResult<Movie> GetMovieByPaging(string keyword, int page, int pageSize, Status status)
         {
-            return _movieService.GetMovieByPaging(keyword, page, size);
+            return _movieService.GetMoviesByPaging(keyword, page, pageSize, status);
         }
         [HttpGet]
         [Route("getallmovies")]
@@ -41,5 +42,12 @@ namespace CoreApp.WebApi.Controllers
         {
             return _movieService.GetMovieById(id);
         }
+        [HttpPost]
+        [Route("createoredit")]
+        public MovieViewModel CreateOrEdit(MovieViewModel input)
+        {
+            return _movieService.CreateOrEdit(input);
+        }
+
     }
 }

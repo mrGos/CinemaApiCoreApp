@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CoreApp.Application.Interfaces;
 using CoreApp.Application.ViewModels.Movie;
 using CoreApp.Data.Entities;
@@ -14,10 +15,12 @@ namespace CoreApp.Application.Implementations
     {
         IRepository<MovieTheater, int> _movietheaterRepository;
         IRepository<ShowTime, int> _showtimeRepository;
-        public ShowTimeService(IRepository<MovieTheater, int> movietheaterRepository, IRepository<ShowTime, int> showtimeRepository)
+        IMapper _mapper;
+        public ShowTimeService(IRepository<MovieTheater, int> movietheaterRepository, IRepository<ShowTime, int> showtimeRepository, IMapper mapper)
         {
             _movietheaterRepository = movietheaterRepository;
             _showtimeRepository = showtimeRepository;
+            _mapper = mapper;
         }
         public List<ShowTimeViewModel> GetAllShowTimeByMovieTheater(int movieId, int theaterId)
         {
@@ -25,7 +28,9 @@ namespace CoreApp.Application.Implementations
             MovieTheater movietheaterItem = _movietheaterRepository.FindSingle(x => x.MovieId == movieId && x.TheaterId == theaterId && x.Movie.Status == Data.Enums.Status.NowShowing);
             if (movietheaterItem != null)
             {
-                return _showtimeRepository.FindAll(x => x.MovieTheaterId == movietheaterItem.Id).OrderBy(x => x.TimeShowing).ProjectTo<ShowTimeViewModel>().ToList();
+                var query = _showtimeRepository.FindAll(x => x.MovieTheaterId == movietheaterItem.Id).OrderBy(x => x.TimeShowing);
+                var result = _mapper.Map<List<ShowTimeViewModel>>(query.ToList());
+                return result;
             }
             return showtimeList;
         }
