@@ -25,6 +25,12 @@ namespace CoreApp.WebApi.Controllers
             return _movieService.GetMoviesByPaging(keyword, page, pageSize, status);
         }
         [HttpGet]
+        [Route("searchmovie")]
+        public PagedResult<Movie> SearchMovie(string keyword, int page, int pageSize)
+        {
+            return _movieService.SearchMovie(keyword, page, pageSize);
+        }
+        [HttpGet]
         [Route("getallmovies")]
         public List<Movie> GetAllMovie(int statusType)
         {

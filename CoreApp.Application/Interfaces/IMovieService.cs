@@ -14,6 +14,7 @@ namespace CoreApp.Application.Interfaces
     {
         List<Movie> GetAllMovie(int statusType);
         PagedResult<Movie> GetMoviesByPaging(string keyword, int page, int pageSize, Status status);
+        PagedResult<Movie> SearchMovie(string keyword, int page, int pageSize);
         List<Movie> GetTopMovieByCondition(int top, int status);
         MovieViewModel GetMovieById(int id);
         MovieViewModel CreateOrEdit(MovieViewModel input);

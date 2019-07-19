@@ -89,11 +89,29 @@ namespace CoreApp.Application.Test.Implementations
                 new Movie{Id=2,Name="",Status=Data.Enums.Status.NowShowing},
                 new Movie{Id=3,Name="",Status=Data.Enums.Status.NowShowing}
             };
-            _mockMovieRepository.Setup(x => x.FindAll())
+            _mockMovieRepository.Setup(x => x.FindAll((It.IsAny<Expression<Func<Movie, bool>>>())))
                 .Returns(movies.AsQueryable());
 
             var movieService = new MovieService(_mockMovieRepository.Object, _mockUnitOfWork.Object, _mapper);
             var result = movieService.GetMoviesByPaging(string.Empty, 2, 1, Status.NowShowing);
+
+            Assert.Equal(3, result.PageCount);
+        }
+
+        [Fact]
+        public void SearchMovie_ValidQuery_ResultSuccess()
+        {
+            var movies = new List<Movie>
+            {
+                new Movie{Id=1,Name="",Status=Data.Enums.Status.NowShowing},
+                new Movie{Id=2,Name="",Status=Data.Enums.Status.NowShowing},
+                new Movie{Id=3,Name="",Status=Data.Enums.Status.NowShowing}
+            };
+            _mockMovieRepository.Setup(x => x.FindAll())
+                .Returns(movies.AsQueryable());
+
+            var movieService = new MovieService(_mockMovieRepository.Object, _mockUnitOfWork.Object, _mapper);
+            var result = movieService.SearchMovie(string.Empty, 2, 1);
 
             Assert.Equal(3, result.PageCount);
         }

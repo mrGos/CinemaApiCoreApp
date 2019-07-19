@@ -79,7 +79,25 @@ namespace CoreApp.Application.Implementations
                 .OrderByDescending(x => x.DateCreated).Take(top).ToList();
         }
 
+        public PagedResult<Movie> SearchMovie(string keyword, int page, int pageSize)
+        {
+            var query = _movieRepository.FindAll();
+            if (!string.IsNullOrEmpty(keyword))
+                query = query.Where(x => x.Name.Contains(keyword));
 
+            int totalRow = query.Count();
+            var data = query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+            var paginationSet = new PagedResult<Movie>()
+            {
+                Results = data.ToList(),
+                CurrentPage = page,
+                RowCount = totalRow,
+                PageSize = pageSize
+            };
 
+            return paginationSet;
+        }
     }
 }
