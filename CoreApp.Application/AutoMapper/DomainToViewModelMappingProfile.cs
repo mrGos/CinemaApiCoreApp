@@ -14,6 +14,8 @@ namespace CoreApp.Application.AutoMapper
         {
             //CreateMap<MovieCategory, MovieCategoryViewModel>();
             CreateMap<Movie, MovieViewModel>();
+            CreateMap<MovieViewModel, Movie>();
+
             CreateMap<Announcement, AnnouncementViewModel>().MaxDepth(2);
 
             CreateMap<Function, FunctionViewModel>();

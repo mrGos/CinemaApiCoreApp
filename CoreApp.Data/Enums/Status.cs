@@ -9,6 +9,7 @@ namespace CoreApp.Data.Enums
         InActive,
         NowShowing,
         UpComming,
+        Active
 
     }
 }
